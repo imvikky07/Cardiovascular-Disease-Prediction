@@ -37,8 +37,8 @@ def get_message(prediction: int, probability: float) -> str:
 )
 async def predict(request: PredictionRequest):
     try:
-        if not model_loader.is_loaded:
-            model_loader.load()
+        # if not model_loader.is_loaded:
+        #     model_loader.load()
 
         features = {
             "age": request.age,
