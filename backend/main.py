@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes import prediction, health
 from app.core.config import settings
+from app.ml.model_loader import model_loader
 
 app = FastAPI(
     title="CVD Risk Detection API",
@@ -11,6 +12,9 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
+@app.on_event("startup")
+def load_model():
+    model_loader.load()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
